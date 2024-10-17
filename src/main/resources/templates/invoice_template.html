@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .info-section {
+            display: flex; /* Use flexbox to arrange items side by side */
+            justify-content: space-between; /* Space items evenly */
+            margin-bottom: 20px;
+        }
+        .info-box {
+            width: 48%; /* Set width for both sections to fit within the flex container */
+            padding: 10px;
+            border: 1px solid #000; /* Optional: Add a border for clarity */
+            border-radius: 5px; /* Optional: Rounded corners */
+            background-color: #f9f9f9; /* Optional: Light background color */
+        }
+        .info-box strong {
+            display: block; /* Display strong elements as block to separate headings */
+            margin-bottom: 5px; /* Space between label and value */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Invoice</h1>
+
+<!-- Seller and Buyer Information -->
+<div class="info-section">
+    <!-- Seller Information -->
+    <div class="info-box">
+        <strong>Seller:</strong>
+        <span th:text="${invoice.seller}"></span><br>
+        <strong>Address:</strong>
+        <span th:text="${invoice.sellerAddress}"></span><br>
+        <strong>GSTIN:</strong>
+        <span th:text="${invoice.sellerGstin}"></span>
+    </div>
+
+    <!-- Buyer Information -->
+    <div class="info-box">
+        <strong>Buyer:</strong>
+        <span th:text="${invoice.buyer}"></span><br>
+        <strong>Address:</strong>
+        <span th:text="${invoice.buyerAddress}"></span><br>
+        <strong>GSTIN:</strong>
+        <span th:text="${invoice.buyerGstin}"></span>
+    </div>
+</div>
+
+<!-- Items Table -->
+<table>
+    <thead>
+    <tr>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Rate</th>
+        <th>Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${invoice.items}">
+        <td th:text="${item.name}"></td>
+        <td th:text="${item.quantity}"></td>
+        <td th:text="${item.rate}"></td>
+        <td th:text="${item.amount}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
